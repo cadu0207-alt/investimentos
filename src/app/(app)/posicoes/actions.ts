@@ -1,7 +1,9 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { fetchBrapiQuote, sleep } from "@/lib/marketData/brapi";
 
 export async function upsertPosition(formData: FormData) {
   const supabase = await createClient();
@@ -54,6 +56,44 @@ export async function upsertPosition(formData: FormData) {
   revalidatePath("/posicoes");
   revalidatePath("/dashboard");
   revalidatePath("/alocacao");
+}
+
+export async function refreshPrices() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Não autenticado");
+
+  const { data: positions } = await supabase
+    .from("invest_positions")
+    .select("ticker")
+    .eq("user_id", user.id);
+
+  const tickers = Array.from(new Set((positions ?? []).map((p) => p.ticker)));
+  let updated = 0;
+
+  for (const ticker of tickers) {
+    try {
+      const quote = await fetchBrapiQuote(ticker);
+      if (quote?.price != null) {
+        const { error } = await supabase
+          .from("invest_positions")
+          .update({ current_price: quote.price, updated_at: new Date().toISOString() })
+          .eq("ticker", ticker)
+          .eq("user_id", user.id);
+        if (!error) updated += 1;
+      }
+    } catch {
+      // brapi falhou pra esse ticker — segue pro próximo
+    }
+    await sleep(200);
+  }
+
+  revalidatePath("/posicoes");
+  revalidatePath("/dashboard");
+  revalidatePath("/alocacao");
+  redirect(`/posicoes?atualizados=${updated}&total=${tickers.length}`);
 }
 
 export async function deletePosition(formData: FormData) {

@@ -1,8 +1,10 @@
 import { getPositions, getManagedPortfolios } from "@/lib/domain/queries";
 import { PageHeader, Card, Label, Input, Select, Button, EmptyState, Badge } from "@/components/ui";
-import { upsertPosition } from "./actions";
+import { upsertPosition, refreshPrices } from "./actions";
 import { PositionsTable } from "./PositionsTable";
 import { formatBRL, formatPct } from "@/lib/domain/format";
+
+export const maxDuration = 60;
 
 const ASSET_CLASSES = [
   { value: "acao", label: "Ação" },
@@ -12,8 +14,16 @@ const ASSET_CLASSES = [
   { value: "outro", label: "Outro" },
 ];
 
-export default async function PosicoesPage() {
-  const [positions, managedPortfolios] = await Promise.all([getPositions(), getManagedPortfolios()]);
+export default async function PosicoesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ atualizados?: string; total?: string }>;
+}) {
+  const [positions, managedPortfolios, { atualizados, total }] = await Promise.all([
+    getPositions(),
+    getManagedPortfolios(),
+    searchParams,
+  ]);
 
   const selfDirected = positions.filter((p) => !p.managed_portfolio_id);
   const grouped = managedPortfolios.map((mp) => ({
@@ -27,6 +37,26 @@ export default async function PosicoesPage() {
         title="Posições"
         subtitle="Ações, FIIs e demais ativos em carteira — separados entre autogeridos e carteiras administradas"
       />
+
+      {atualizados !== undefined && (
+        <p className="text-sm text-emerald-400 bg-emerald-950/40 border border-emerald-900 rounded-md px-3 py-2 mb-6">
+          Preços atualizados: {atualizados}/{total} tickers cotados via brapi.dev.
+        </p>
+      )}
+
+      <Card className="mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-sm font-medium text-slate-300">Preços de mercado</h2>
+          <form action={refreshPrices}>
+            <Button type="submit" variant="secondary">
+              Atualizar preços agora
+            </Button>
+          </form>
+        </div>
+        <p className="text-xs text-slate-600">
+          Roda automaticamente todo dia útil às 18:05 (após o fechamento). Clique aqui pra atualizar na hora, sem esperar o horário agendado — cobre ações e FIIs, opções ainda são manuais.
+        </p>
+      </Card>
 
       <Card className="mb-6">
         <h2 className="text-sm font-medium text-slate-300 mb-4">Adicionar posição</h2>
