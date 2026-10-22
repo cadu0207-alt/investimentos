@@ -18,6 +18,7 @@ import {
   Siren,
   SlidersHorizontal,
   ShieldCheck,
+  Upload,
 } from "lucide-react";
 
 const links = [
@@ -33,6 +34,7 @@ const links = [
   { href: "/robos", label: "Robôs", icon: Bot },
   { href: "/benchmark", label: "Benchmark", icon: TrendingUp },
   { href: "/notas", label: "Notas de estratégia", icon: NotebookPen },
+  { href: "/importar", label: "Importar notas", icon: Upload },
   { href: "/configuracoes", label: "Configurações", icon: Settings },
 ];
 

@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     "/fichas": ["./docs/fase0/**/*.{csv,json}"],
     "/alertas": ["./docs/fase0/**/*.{csv,json}"],
     "/comprar": ["./docs/fase0/**/*.{csv,json}"],
+    "/importar": ["./docs/fase0/**/*.{csv,json}"],
   },
 };
 

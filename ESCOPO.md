@@ -26,6 +26,9 @@ Fica fora do site da Ellevare: lá o conteúdo é estático e público no GitHub
 - A nota de corretagem é a fonte da verdade: importar as notas da Necton/BTG.
 - A posição é calculada a partir das operações, nunca digitada à mão.
 - Cotações atualizadas automaticamente (cron `atualizar-precos` + brapi).
+- Status: operações e resultados de 2026 no banco (`invest_trades`, `invest_realized`); posições =
+  saldo inicial da Necton de 22/10/2026 (`invest_position_baselines`) + notas novas, pela tela
+  "Importar notas". Falta: custo médio de 31/12/2025 para reconstruir o ano inteiro só pelas notas.
 
 ## Fase 2 — Central de opções
 - Por opção: payoff, gregas, distância até o strike, probabilidade de exercício,
