@@ -124,3 +124,27 @@ export interface InvestStrategyNote {
   tags: string[] | null;
   created_at: string;
 }
+
+export type PlanAction =
+  | "a_definir"
+  | "manter"
+  | "reduzir"
+  | "encerrar"
+  | "rolar"
+  | "aceitar_exercicio"
+  | "call_coberta";
+
+export interface InvestPositionPlan {
+  id: string;
+  user_id: string;
+  ticker: string;
+  thesis: string | null;
+  action: PlanAction;
+  exit_price: number | null;
+  stop_price: number | null;
+  review_trigger: string | null;
+  deadline: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}

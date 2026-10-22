@@ -5,6 +5,7 @@ import type {
   InvestOptionPosition,
   InvestPortfolioSnapshot,
   InvestPosition,
+  InvestPositionPlan,
   InvestRobotSignal,
   InvestStrategyNote,
   InvestTrade,
@@ -77,4 +78,10 @@ export async function getStrategyNotes(): Promise<InvestStrategyNote[]> {
     .select("*")
     .order("note_date", { ascending: false });
   return (data as InvestStrategyNote[]) ?? [];
+}
+
+export async function getPositionPlans(): Promise<InvestPositionPlan[]> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("invest_position_plans").select("*").order("ticker");
+  return (data as InvestPositionPlan[]) ?? [];
 }

@@ -3,7 +3,7 @@ import { formatBRL, formatPct, formatNumber, formatDate } from "@/lib/domain/for
 import { getSnapshot, getAccountSnapshot, getIrSnapshot, SECTOR_LABEL, SNAPSHOT_DATE } from "@/lib/fase0/snapshot";
 
 const PENDENCIAS = [
-  "Preencher a ficha de cada posição: tese, ação, gatilho de saída e prazo.",
+  "Preencher a ficha de cada posição em Fichas de posição (/fichas): tese, ação, gatilho de saída e prazo.",
   "Opcional: posição e custo médio em 31/12/2025 para conciliar o prejuízo acumulado ao centavo.",
 ];
 
