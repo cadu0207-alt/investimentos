@@ -13,10 +13,12 @@ import {
   Wallet,
   Settings,
   LogOut,
+  ScanSearch,
 } from "lucide-react";
 
 const links = [
   { href: "/dashboard", label: "Visão geral", icon: LayoutDashboard },
+  { href: "/raio-x", label: "Raio-X", icon: ScanSearch },
   { href: "/posicoes", label: "Posições", icon: Wallet },
   { href: "/opcoes", label: "Risco de opções", icon: LineChart },
   { href: "/alocacao", label: "Alocação", icon: PieChart },

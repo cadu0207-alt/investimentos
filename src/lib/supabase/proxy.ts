@@ -36,6 +36,7 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/benchmark") ||
     request.nextUrl.pathname.startsWith("/notas") ||
     request.nextUrl.pathname.startsWith("/posicoes") ||
+    request.nextUrl.pathname.startsWith("/raio-x") ||
     request.nextUrl.pathname.startsWith("/configuracoes");
 
   if (!user && isAppRoute) {
