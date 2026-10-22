@@ -1,9 +1,28 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 const ALLOWED_EMAIL = process.env.NEXT_PUBLIC_ALLOWED_EMAIL;
+
+// A conta foi criada via Google (projeto Supabase compartilhado com o site do Pokémon), então não tem senha.
+export async function signInWithGoogle() {
+  const h = await headers();
+  const origin = h.get("origin") ?? `${h.get("x-forwarded-proto") ?? "http"}://${h.get("host")}`;
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: `${origin}/auth/callback` },
+  });
+
+  if (error || !data.url) {
+    redirect(`/login?error=${encodeURIComponent(error?.message ?? "Não foi possível iniciar o login com Google.")}`);
+  }
+
+  redirect(data.url);
+}
 
 export async function signIn(formData: FormData) {
   const email = String(formData.get("email") ?? "");

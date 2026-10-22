@@ -46,6 +46,15 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
+  // O projeto Supabase é compartilhado com outros apps: só o e-mail autorizado entra nas telas.
+  const allowedEmail = process.env.NEXT_PUBLIC_ALLOWED_EMAIL?.toLowerCase();
+  if (user && isAppRoute && allowedEmail && user.email?.toLowerCase() !== allowedEmail) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.search = `?error=${encodeURIComponent("Acesso restrito ao e-mail autorizado.")}`;
+    return NextResponse.redirect(url);
+  }
+
   if (user && (request.nextUrl.pathname === "/login" || request.nextUrl.pathname === "/signup")) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
