@@ -23,7 +23,7 @@ Uma posição por vez. Cada análise vira um dossiê em `docs/analises/` e termi
 
 | # | Posição | Prazo que manda | Status | Dossiê |
 |---|---|---|---|---|
-| 1 | VIVTX430 / VIVT3 | vencimento 18/12/2026 | em análise | [vivt3-vivtx430.md](vivt3-vivtx430.md) |
+| 1 | VIVTX430 / VIVT3 | vencimento 18/12/2026 | **decidido 22/10** (esperar 3T26 com gatilhos; ficha gravada) | [vivt3-vivtx430.md](vivt3-vivtx430.md) |
 | 2 | SAPR11 | — | rascunho no lote 1 | [teses-lote1-vivt-sapr.md](teses-lote1-vivt-sapr.md) |
 | 3 | VIVA3 | — | pendente | |
 | 4 | SUZB3 | — | pendente | |

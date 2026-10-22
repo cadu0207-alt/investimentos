@@ -102,6 +102,139 @@ crédito em caso de exercício.
 3. Se pensar em C: a taxa de juros do Invest Flex.
 4. Se pensar em B: print da cadeia de puts VIVT de janeiro a março de 2027.
 
+## 8. Atualização (22/10, tarde) — sua tese, o book e os gatilhos
+
+**Sua tese:** a venda da put era só para ganhar o prêmio; você **não quer ficar com VIVT3**
+e quer **esperar o 3T26 (10/11)** antes de decidir → caminho **D**.
+
+### O que o print da cadeia mostra
+| | |
+|---|---|
+| VIVT3 | R$ 33,10 (+1,41% no dia); máxima 33,19 / mínima 32,55 |
+| Volatilidade | histórica 27,7%; implícita 44,6%; IV Rank 9,9% (implícita baixa para o histórico da própria ação) |
+| **VIVTX430 (strike 40,97)** | **book vazio** (bid 0,00 / ask 0,00), assim como as puts de dez/26 de 38,97 a 39,97 |
+| Puts de dez/26 com oferta | X395 (37,47): 3,69 / 5,16; X390 (36,97): 3,25 / 4,74 — spreads de ~40% |
+| Valor intrínseco hoje | 40,97 − 33,10 = **R$ 7,87** → recomprar custaria ~R$ 5.509 (resultado ~−R$ 4.018) |
+
+Consequências práticas:
+1. **Não dá para recomprar clicando na tela.** Sem ofertas, o encerramento é por ordem
+   limitada perto do valor intrínseco, em lotes de 200–300, ou pedindo preço (RFQ) à mesa da
+   Necton. Isso leva tempo: não dá para deixar para o último dia.
+2. **A recompra também precisa de caixa:** ~R$ 5.509 contra R$ 2.781,60 de saldo livre →
+   faltam ~R$ 2.727. É preciso vender algo **livre** antes (as 10 ações bloqueadas só saem
+   depois da put). Exemplo: ~70 SAPR11 (~R$ 2,9 mil), o que também reduz a concentração.
+
+### Por que VIVT3 subiu em outubro (~R$ 29,8 em 30/09 → R$ 33,1)
+Não há fato relevante da empresa em outubro. A alta parece vir de:
+- **Mercado:** Ibovespa +10,8% no mês até 21/10, com "trade eleitoral" e queda dos juros futuros.
+- **Juros:** ~80% de chance de corte da Selic em novembro → ações pagadoras de dividendos
+  ficam mais atraentes.
+- **Proventos:** JCP de R$ 450 mi aprovado em 14/10 (data-com 26/10) e programa de recompra
+  de até R$ 1 bi até fev/27.
+- **Repique técnico:** a ação estava na mínima de 52 semanas (~R$ 29,1).
+
+**Se sustenta?** A alta veio mais do mercado do que da empresa: o ponto que derrubou a ação
+(caixa livre caindo e dúvida sobre os dividendos de 2027) **não mudou**. Ela se sustenta se:
+(1) o resultado da eleição (25/10) não desfizer o "trade eleitoral"; (2) o Copom cortar em
+04/11; (3) o 3T26 (10/11) mostrar caixa estável e uma política de remuneração 2027+ forte.
+Os dois primeiros são de mercado; o terceiro é o único da empresa e é o mais importante.
+
+### Mapa preço × resultado (recomprando pelo valor intrínseco)
+| VIVT3 | Custo para recomprar | Resultado final |
+|---:|---:|---:|
+| 31,00 | R$ 6.979 | −R$ 5.488 |
+| 31,70 | R$ 6.489 | −R$ 4.998 |
+| 32,00 | R$ 6.279 | −R$ 4.788 |
+| 33,10 (hoje) | R$ 5.509 | −R$ 4.018 |
+| 34,00 | R$ 4.879 | −R$ 3.388 |
+| 35,00 | R$ 4.179 | −R$ 2.688 |
+| 36,00 | R$ 3.479 | −R$ 1.988 |
+| 38,84 | R$ 1.491 | R$ 0 (empate) |
+
+Cada R$ 1,00 de VIVT3 vale R$ 700 a mais ou a menos.
+
+### Gatilhos propostos para o caminho D (você confirma ou ajusta)
+| # | Gatilho | Ação |
+|---|---|---|
+| 1 | **Stop antes do 3T26:** VIVT3 fechar abaixo de **R$ 31,70** (perda chegaria a ~R$ 5.000) | Encerrar a put |
+| 2 | **Alvo antes do 3T26:** VIVT3 fechar acima de **R$ 36,00** | Encerrar (ou metade) travando ~−R$ 2.000 |
+| 3 | **Dia seguinte ao 3T26 (11/11):** decidir entre encerrar e rolar. Se a política de dividendos 2027+ vier fraca **ou** VIVT3 < R$ 33,00 | Encerrar até 14/11 |
+| 3b | **Rolagem pós-resultado** (incluída em 22/10): se VIVT3 ≥ R$ 36,00 e houver liquidez | Avaliar rolar só a quantidade que o caixa próprio cobre (checklist da seção 9; custos de referência na seção 10) e encerrar o restante |
+| 4 | **Prazo final:** em **11/12**, encerrar o que restar, salvo VIVT3 ≥ R$ 38,84 | Evita o exercício e o book vazio da última semana |
+| 0 | **Antes de tudo:** gerar ~R$ 2,8 mil de caixa livre (venda de algo não bloqueado) | Sem isso, nenhum gatilho consegue ser executado |
+
+Rolagem (caminho B) fica em aberto até o print das puts VIVT de jan–mar/27.
+
+**Decisão registrada em 22/10:** gatilhos 0 a 4 confirmados e gravados na ficha da
+VIVTX430 (ação: encerrar; prazo 11/12). Na ficha, stop e alvo estão em preço do prêmio da put
+(9,27 ≈ VIVT3 a R$ 31,70; 4,97 ≈ VIVT3 a R$ 36,00), que é o que o painel de alertas compara.
+
+**Liquidez (observação sua, 22/10):** hoje não há ofertas nas puts de dezembro nem de
+janeiro. Na B3 a liquidez se concentra nos 1–2 vencimentos mais próximos: dezembro passa a ser
+o vencimento da vez depois de **19/11** (vencimento de novembro), e janeiro só depois de 18/12.
+Na prática:
+- o gatilho 3 (11–14/11) pode ainda encontrar o book fino → ter a mesa (RFQ) como plano B;
+- a partir de 20/11 o book de dezembro deve melhorar, o que favorece executar os gatilhos 1, 2
+  e 4 por ordem limitada;
+- uma rolagem para janeiro tende a ficar viável só na janela final (perto de 11/12); conferir
+  o book nesse momento.
+
+## 9. Rolagem: dá para baixar o strike sem pagar?
+
+Simulação Black-Scholes (VIVT3 R$ 33,10, vol 30%, Selic 13,75%; valores teóricos):
+
+| Rolar para | Mesmo strike 40,97 | Strike 39,00 | Strike 38,00 | Strike 36,00 | Strike que zera o custo |
+|---|---:|---:|---:|---:|---:|
+| jan/27 | −R$ 175 | −R$ 1.346 | −R$ 1.898 | −R$ 2.889 | 41,26 (maior!) |
+| fev/27 | −R$ 350 | −R$ 1.431 | −R$ 1.938 | −R$ 2.849 | 41,57 |
+| mar/27 | −R$ 462 | −R$ 1.488 | −R$ 1.967 | −R$ 2.827 | 41,81 |
+
+(Valores = prêmio da put nova − custo de recomprar a atual, para 700 opções.)
+
+**Por quê:** uma put muito dentro do dinheiro (europeia) vale quase só o strike trazido a
+valor presente menos a ação. Com juros de ~14% ao ano, mais prazo **reduz** o valor dela. Por
+isso rolar para frente com o mesmo strike já custa dinheiro, e baixar o strike custa mais.
+Para "baixar o strike mantendo o prêmio" seria preciso **aumentar a quantidade** (ex.: ~1.625
+puts de strike 36 em março → obrigação de compra de ~R$ 58,5 mil), o que repete o padrão que
+gerou as maiores perdas do ano.
+
+**Quando uma rolagem faz sentido (checklist):**
+1. Você abriria a posição nova hoje, do zero? Se não, não role.
+2. Sai com crédito, ou débito pequeno e justificado.
+3. Mesma quantidade ou menor; nunca maior.
+4. Obrigação nova (strike × quantidade) cabe no caixa próprio.
+5. Há liquidez nas duas pontas (fazer como uma ordem só, pela mesa).
+6. Lembrar: a recompra realiza a perda de qualquer jeito; rolar é uma aposta nova, não
+   "salva" a perda antiga.
+
+## 10. E se VIVT3 for a R$ 36–37 depois do 3T26?
+
+Simulação em 12/11 (vol 28%, Selic 13,5%), 700 opções. "Fechar" = recomprar pelo intrínseco.
+
+| VIVT3 | Fechar a dez/40,97 | Rolar mesmo strike → jan | Rolar → fev strike 39 | → fev strike 38 | → fev strike 37 |
+|---:|---:|---:|---:|---:|---:|
+| 36,00 | −R$ 1.988 (fim) | −R$ 82 | −R$ 1.080 | −R$ 1.492 | −R$ 1.857 |
+| 37,00 | −R$ 1.288 (fim) | −R$ 11 | −R$ 859 | −R$ 1.222 | −R$ 1.536 |
+
+(Nas colunas de rolagem: custo extra da troca, além da perda já realizada na recompra.)
+
+**O que muda:** sua intuição está certa em parte. Com a ação mais perto do strike, a opção
+ganha valor de tempo e liquidez: **rolar com o mesmo strike fica quase de graça**. Mas
+**baixar o strike continua custando** R$ 0,9 a 1,9 mil, porque cada real de strike a menos
+reduz a obrigação e a perda máxima.
+
+**Exemplo com VIVT3 a R$ 37 → put de fev, strike 38:**
+- Recompra realiza −R$ 1.288; venda nova recebe ~R$ 1.372.
+- Se VIVT3 terminar fevereiro **acima de R$ 38** (chance ~43%): fecha o ciclo no zero a zero.
+- Se não: nova perda ou exercício em fevereiro, com obrigação de **R$ 26.600**.
+
+**Conflitos com a sua própria regra:** rolar mantém a obrigação de comprar VIVT3 (sua tese é
+não ficar com ela) e o Checklist exige caixa próprio para a obrigação nova. Com R$ 2,8 mil de
+caixa, nenhuma rolagem das 700 passa; seria preciso reduzir a quantidade ou gerar caixa antes.
+
+**Variante possível para avaliar no dia:** encerrar a maior parte no alvo e rolar só a
+quantidade que o caixa próprio cobre.
+
 ## Fontes
 - [InfoMoney — Goldman recomenda venda de VIVT3](https://www.infomoney.com.br/mercados/goldman-sachs-recomenda-vender-acoes-da-vivo-vivt3-e-ficar-neutro-em-tim-entenda/)
 - [InfoMoney — Santander prefere Vivo](https://www.infomoney.com.br/mercados/santander-eleva-tim-tims3-para-compra-mas-mantem-preferencia-por-vivo-vivt3/)
@@ -121,3 +254,8 @@ crédito em caso de exercício.
 - [Terra — DIs, eleição e Copom](https://www.terra.com.br/economia/taxas-dos-dis-caem-com-eleicao-no-brasil-e-exterior-no-radar,f1be801c1f9bb012ea04430acf64193fmcirqqct.html)
 - [Trademap — Ibovespa antes do 2º turno](https://trademap.com.br/noticias/news-8470979)
 - [Investing.com — data do próximo resultado](https://www.investing.com/equities/telef-brasil-on)
+- [SEC — 6-K 2T26 (programa de recompra)](https://www.sec.gov/Archives/edgar/data/0001066119/000129281426003922/vivpr2q26_6k.htm)
+- [Seu Dinheiro — recompra e retorno após 4T25](https://www.seudinheiro.com/2026/empresas/telefonica-brasil-vivo-vivt3-turbina-retorno-ao-acionista-apos-balanco-do-4t25-com-direito-a-jcp-recompra-e-devolucao-bilionaria-aos-investidores-miql/)
+- [BPMoney — Ibovespa recua com cautela eleitoral](https://bpmoney.com.br/mercado/ibovespa-cai-086-dolar-sobe-502-cautela-eleitoral)
+- [Gazeta Mercantil — day trade 22/10 (VIVT3 a R$ 32,72)](https://gazetamercantil.com/day-trade-hoje-22-10-2026-agora-mbrf-totvs-vivo-csn-b3-vamos)
+- [Telesíntese — Anatel libera garantias à Vivo](https://telesintese.com.br/anatel-libera-r-2986-milhoes-em-garantias-a-vivo/)
