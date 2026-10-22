@@ -17,12 +17,14 @@ import {
   ClipboardList,
   Siren,
   SlidersHorizontal,
+  ShieldCheck,
 } from "lucide-react";
 
 const links = [
   { href: "/dashboard", label: "Visão geral", icon: LayoutDashboard },
   { href: "/raio-x", label: "Raio-X", icon: ScanSearch },
   { href: "/alertas", label: "Alertas de venda", icon: Siren },
+  { href: "/comprar", label: "Posso comprar?", icon: ShieldCheck },
   { href: "/limites", label: "Limites de risco", icon: SlidersHorizontal },
   { href: "/fichas", label: "Fichas de posição", icon: ClipboardList },
   { href: "/posicoes", label: "Posições", icon: Wallet },

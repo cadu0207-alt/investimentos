@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     "/raio-x": ["./docs/fase0/**/*.{csv,json}"],
     "/fichas": ["./docs/fase0/**/*.{csv,json}"],
     "/alertas": ["./docs/fase0/**/*.{csv,json}"],
+    "/comprar": ["./docs/fase0/**/*.{csv,json}"],
   },
 };
 

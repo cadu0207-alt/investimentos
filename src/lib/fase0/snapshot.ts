@@ -122,6 +122,19 @@ export async function getIrSnapshot(): Promise<IrSnapshot> {
   return JSON.parse(json);
 }
 
+/** Prêmio pago em compras de opções no mês (inclui recompras), a partir das notas processadas. */
+export async function getMonthOptionPremium(month: string): Promise<number> {
+  const csv = await readFile(path.join(SNAPSHOT_DIR, "historico-2026", "operacoes.csv"), "utf8").catch(() => "");
+  const [header, ...lines] = csv.trim().split(/\r?\n/);
+  if (!header) return 0;
+  const cols = header.split(",");
+  const at = (cells: string[], name: string) => cells[cols.indexOf(name)];
+  return lines
+    .map((l) => l.split(","))
+    .filter((c) => at(c, "data").startsWith(month) && at(c, "cv") === "C" && at(c, "mercado").startsWith("OPCAO"))
+    .reduce((acc, c) => acc + Number(at(c, "valor")), 0);
+}
+
 export const SECTOR_LABEL: Record<string, string> = {
   saneamento: "Saneamento",
   varejo: "Varejo",
