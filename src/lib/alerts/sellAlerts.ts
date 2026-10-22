@@ -2,18 +2,11 @@ import type { InvestPositionPlan } from "@/lib/domain/types";
 import { formatDate, formatNumber } from "@/lib/domain/format";
 import { isPlanComplete } from "@/lib/domain/plans";
 import type { AccountSnapshot, SnapshotRow } from "@/lib/fase0/snapshot";
+import { DEFAULT_LIMITS, type Limits } from "./limits";
 
-/** Limites padrão; passam para uma tabela editável no app no próximo passo. */
-export const DEFAULT_LIMITS = {
-  maxAssetPct: 15, // % do valor em ações + FII
-  maxSectorPct: 30,
-  nearExpiryBusinessDays: 45,
-  almostWorthlessPct: 20, // opção comprada valendo menos que isso do investido
-  deadlineWarningDays: 7,
-  monthlyExemptSales: 20_000,
-};
+/** Limite legal de vendas de ações no mês com ganho isento de IR (swing trade). */
+const MONTHLY_EXEMPT_SALES = 20_000;
 
-export type Limits = typeof DEFAULT_LIMITS;
 export type AlertLevel = 1 | 2 | 3;
 
 export interface SellAlert {
@@ -191,7 +184,7 @@ export function computeSellAlerts({ rows, account, plans, monthStockSales, sales
     }
   }
 
-  const exemptRoom = limits.monthlyExemptSales - monthStockSales;
+  const exemptRoom = MONTHLY_EXEMPT_SALES - monthStockSales;
   const gains = stocks.filter((s) => s.kind === "acao" && s.openResult > 0);
   if (exemptRoom > 0 && gains.length) {
     alerts.push({

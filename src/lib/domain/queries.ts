@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { limitsFromRow, type Limits } from "@/lib/alerts/limits";
 import type {
   InvestAsset,
   InvestManagedPortfolio,
@@ -84,4 +85,10 @@ export async function getPositionPlans(): Promise<InvestPositionPlan[]> {
   const supabase = await createClient();
   const { data } = await supabase.from("invest_position_plans").select("*").order("ticker");
   return (data as InvestPositionPlan[]) ?? [];
+}
+
+export async function getLimits(): Promise<Limits> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("invest_limits").select("*").maybeSingle();
+  return limitsFromRow(data);
 }

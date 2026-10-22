@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { PageHeader, Card, Badge, EmptyState } from "@/components/ui";
 import { formatDate } from "@/lib/domain/format";
-import { getPositionPlans } from "@/lib/domain/queries";
-import { computeSellAlerts, DEFAULT_LIMITS, type AlertLevel } from "@/lib/alerts/sellAlerts";
+import { getLimits, getPositionPlans } from "@/lib/domain/queries";
+import { computeSellAlerts, type AlertLevel } from "@/lib/alerts/sellAlerts";
 import { getAccountSnapshot, getIrSnapshot, getSnapshot, SNAPSHOT_DATE } from "@/lib/fase0/snapshot";
 
 export const dynamic = "force-dynamic";
@@ -14,7 +14,13 @@ const LEVELS: Record<AlertLevel, { title: string; subtitle: string; tone: "negat
 };
 
 export default async function AlertasPage() {
-  const [rows, account, plans, ir] = await Promise.all([getSnapshot(), getAccountSnapshot(), getPositionPlans(), getIrSnapshot()]);
+  const [rows, account, plans, ir, limits] = await Promise.all([
+    getSnapshot(),
+    getAccountSnapshot(),
+    getPositionPlans(),
+    getIrSnapshot(),
+    getLimits(),
+  ]);
   const alerts = computeSellAlerts({
     rows,
     account,
@@ -22,6 +28,7 @@ export default async function AlertasPage() {
     monthStockSales: ir.swing_trade.total_vendas_acoes,
     salesMonthLabel: ir.mes.split("-").reverse().join("/"),
     today: new Date(),
+    limits,
   });
 
   // "Sem plano escrito" é um alerta por ativo; agrupamos para não esconder o resto
@@ -46,8 +53,11 @@ export default async function AlertasPage() {
 
       <p className="text-xs text-slate-500 mb-6 max-w-3xl">
         Sinais calculados a partir das posições, das fichas e dos limites. Quem decide o que fazer é você. Limites atuais: ativo até{" "}
-        {DEFAULT_LIMITS.maxAssetPct}%, setor até {DEFAULT_LIMITS.maxSectorPct}%, vencimento próximo = {DEFAULT_LIMITS.nearExpiryBusinessDays}{" "}
-        dias úteis.
+        {limits.maxAssetPct}%, setor até {limits.maxSectorPct}%, vencimento próximo = {limits.nearExpiryBusinessDays}{" "}
+        dias úteis.{" "}
+        <Link href="/limites" className="text-emerald-400 hover:underline">
+          Ajustar limites
+        </Link>
       </p>
 
       {alerts.length === 0 ? (
