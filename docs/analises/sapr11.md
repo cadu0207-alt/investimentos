@@ -280,13 +280,14 @@ lado continua: no pessimista (R$ 34), as 900 perdem ~R$ 5,6 mil (440 perderiam ~
 | 5 | **Alvo de preço:** SAPR11 a **R$ 52** (piso do P1) | Mercado já pagou a melhora | Vender o excesso (~460 units, ~+R$ 5,4 mil) e manter o resto com call coberta acima de R$ 56 |
 | 6 | **Prazo da tese:** **31/03/2027** (posse + 90 dias) | Nenhuma troca de comando até lá | Reduzir ao limite de 15% |
 
-### Gatilho 0 — caixa para a VIVTX430 (em decisão, até 23/10)
+### Gatilho 0 — caixa para a VIVTX430 (decisão depois do 2º turno: 26 a 30/10)
 - **Call coberta em 100 units não garante o caixa:** o prêmio nas 100 é de R$ 25 (K498) a
   R$ 140 (K445); o dinheiro maior só entra se a call for exercida em 19/11.
 - **Vender 100 units garante:** ~R$ 4.050 (cobre os ~R$ 2,7 mil da recompra da VIVTX430 com
   folga); ganho ~R$ 28; feito **em outubro**, o mês fecha com ~R$ 16 mil de vendas de ações
   (abaixo dos R$ 20 mil) → isento. Ficam 800 units (concentração ~28%). Liquidação em D+2.
-- Decisão sua nesta semana; o prazo para a isenção de outubro é o último pregão do mês (30/10).
+- Você decide depois do 2º turno (25/10), entre 26 e 30/10: ainda em outubro, dentro da
+  janela de isenção (último pregão do mês: 30/10).
 
 ### Consequências de segurar as 900
 - **Exceção ao limite de 15%**, consciente e com prazo (até o gatilho 6). Fica registrada na
