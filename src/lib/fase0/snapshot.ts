@@ -2,12 +2,12 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 /**
- * Leitura do snapshot da Fase 0 (CSV extraído do painel Posição do Profit).
+ * Leitura do snapshot da Fase 0 (posições e conta exportadas da Necton).
  * Fica fora do Supabase até a Fase 1, quando as posições passam a vir das notas de corretagem.
  */
 
 export const SNAPSHOT_DATE = "2026-10-22";
-const SNAPSHOT_FILE = path.join(process.cwd(), "docs", "fase0", `posicoes-${SNAPSHOT_DATE}.csv`);
+const SNAPSHOT_DIR = path.join(process.cwd(), "docs", "fase0");
 
 export type SnapshotKind = "acao" | "fii" | "opcao_call" | "opcao_put";
 
@@ -17,29 +17,75 @@ export interface SnapshotRow {
   side: "compra" | "venda";
   quantity: number;
   avgPrice: number;
+  avgPriceWithDividends: number;
+  invested: number;
   currentPrice: number;
   positionValue: number;
+  dividends: number;
+  /** Resultado histórico (sem proventos), como a Necton mostra. */
   openResult: number;
+  blockedQuantity: number;
   sector: string;
+  option: {
+    underlying: string;
+    strike: number;
+    expiry: string;
+    businessDays: number;
+    underlyingPrice: number;
+    blackScholes: number;
+  } | null;
+}
+
+export interface AccountSnapshot {
+  fonte: string;
+  saldo_disponivel: number;
+  bloqueios_saldo: number;
+  saldo_mais_invest_flex: number;
 }
 
 export async function getSnapshot(): Promise<SnapshotRow[]> {
-  const csv = await readFile(SNAPSHOT_FILE, "utf8");
-  const [, ...lines] = csv.trim().split(/\r?\n/);
+  const csv = await readFile(path.join(SNAPSHOT_DIR, `posicoes-${SNAPSHOT_DATE}.csv`), "utf8");
+  const [header, ...lines] = csv.trim().split(/\r?\n/);
+  const columns = header.split(",");
+
   return lines.map((line) => {
-    const [ticker, kind, side, qty, avg, current, value, result, sector] = line.split(",");
+    const cells = line.split(",");
+    const get = (name: string) => cells[columns.indexOf(name)] ?? "";
+    const num = (name: string) => Number(get(name) || 0);
+    const kind = get("tipo") as SnapshotKind;
+
     return {
-      ticker,
-      kind: kind as SnapshotKind,
-      side: side as SnapshotRow["side"],
-      quantity: Number(qty),
-      avgPrice: Number(avg),
-      currentPrice: Number(current),
-      positionValue: Number(value),
-      openResult: Number(result),
-      sector,
+      ticker: get("ticker"),
+      kind,
+      side: get("lado") as SnapshotRow["side"],
+      quantity: num("quantidade"),
+      avgPrice: num("preco_medio"),
+      avgPriceWithDividends: num("preco_medio_prov"),
+      invested: num("investido"),
+      currentPrice: num("preco_atual"),
+      positionValue: num("volume"),
+      dividends: num("proventos"),
+      openResult: num("resultado"),
+      blockedQuantity: num("qtd_bloqueada"),
+      sector: get("setor"),
+      option:
+        kind === "opcao_call" || kind === "opcao_put"
+          ? {
+              underlying: get("objeto"),
+              strike: num("strike"),
+              expiry: get("vencimento"),
+              businessDays: num("dias_uteis"),
+              underlyingPrice: num("preco_objeto"),
+              blackScholes: num("black_scholes"),
+            }
+          : null,
     };
   });
+}
+
+export async function getAccountSnapshot(): Promise<AccountSnapshot> {
+  const json = await readFile(path.join(SNAPSHOT_DIR, `conta-${SNAPSHOT_DATE}.json`), "utf8");
+  return JSON.parse(json);
 }
 
 export const SECTOR_LABEL: Record<string, string> = {
@@ -59,46 +105,3 @@ export const SECTOR_LABEL: Record<string, string> = {
   seguros: "Seguros",
   a_classificar: "A classificar",
 };
-
-const MONTHS = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-
-export interface OptionCodeInfo {
-  underlying: string;
-  type: "call" | "put";
-  monthIndex: number;
-  /** Strike lido dos dígitos do código (ex.: 430 → 43,00). Convenção comum na B3, mas precisa ser confirmada. */
-  presumedStrike: number;
-  /** Próximo vencimento padrão (3ª sexta-feira) do mês da série, a partir da data do snapshot. */
-  presumedExpiry: Date;
-}
-
-/** Decodifica um código de opção da B3: A–L = call (jan–dez), M–X = put (jan–dez). */
-export function parseOptionCode(code: string, from: Date): OptionCodeInfo | null {
-  const m = /^([A-Z]{4})([A-X])(\d+)$/.exec(code);
-  if (!m) return null;
-  const letter = m[2].charCodeAt(0) - 65;
-  const type = letter < 12 ? "call" : "put";
-  const monthIndex = letter % 12;
-
-  let year = from.getUTCFullYear();
-  let expiry = thirdFriday(year, monthIndex);
-  if (expiry < from) expiry = thirdFriday(++year, monthIndex);
-
-  return {
-    underlying: m[1],
-    type,
-    monthIndex,
-    presumedStrike: Number(m[3]) / 10,
-    presumedExpiry: expiry,
-  };
-}
-
-export function monthLabel(index: number, date: Date) {
-  return `${MONTHS[index]}/${String(date.getUTCFullYear()).slice(2)}`;
-}
-
-function thirdFriday(year: number, month: number) {
-  const first = new Date(Date.UTC(year, month, 1));
-  const offset = (5 - first.getUTCDay() + 7) % 7;
-  return new Date(Date.UTC(year, month, 1 + offset + 14));
-}
