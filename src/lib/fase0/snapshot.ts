@@ -40,6 +40,7 @@ export interface AccountSnapshot {
   fonte: string;
   saldo_disponivel: number;
   bloqueios_saldo: number;
+  /** Saldo + limite do Invest Flex, que é crédito (empréstimo), não dinheiro próprio. */
   saldo_mais_invest_flex: number;
 }
 

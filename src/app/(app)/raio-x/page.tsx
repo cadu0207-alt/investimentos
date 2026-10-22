@@ -9,7 +9,7 @@ const PENDENCIAS = [
 
 const RESOLVIDAS = [
   "Strikes, vencimentos e cotação dos objetos das opções (Necton).",
-  "Caixa e bloqueios da conta.",
+  "Caixa e bloqueios da conta (Invest Flex é crédito, não saldo).",
   "Conta única: Necton/BTG Pactual.",
   "Prejuízo acumulado a compensar (IR de out/2026).",
   "Histórico de perdas de 2026 a partir das 50 notas (docs/fase0/historico-2026.md).",
@@ -32,7 +32,8 @@ export default async function RaioXPage() {
   const stocksResult = sum(stocks, (r) => r.openResult);
   const optionsResult = sum(options, (r) => r.openResult);
   const givenBackPct = stocksResult > 0 ? (-optionsResult / stocksResult) * 100 : null;
-  const cash = account.saldo_mais_invest_flex;
+  const cash = account.saldo_disponivel;
+  const credit = account.saldo_mais_invest_flex - account.saldo_disponivel;
 
   const optionRows = options
     .map((o) => {
@@ -94,9 +95,9 @@ export default async function RaioXPage() {
           tone={optionsResult >= 0 ? "positive" : "negative"}
         />
         <StatCard
-          label="Caixa (saldo + Invest Flex)"
+          label="Caixa (saldo livre)"
           value={formatBRL(cash)}
-          hint={`Saldo livre ${formatBRL(account.saldo_disponivel)}`}
+          hint={`+ ${formatBRL(credit)} de limite Invest Flex (crédito, não é saldo)`}
         />
       </div>
 
@@ -155,8 +156,7 @@ export default async function RaioXPage() {
               <p className="text-xs text-slate-500 uppercase">Compra obrigatória se exercida</p>
               <p className="text-lg font-semibold text-amber-400">{formatBRL(assignmentNotional)}</p>
               <p className="text-xs text-slate-500">
-                {formatPct((assignmentNotional / cash) * 100, 0)} do caixa · {formatPct((assignmentNotional / stocksValue) * 100, 0)} do
-                valor em ações
+                Caixa livre {formatBRL(cash)} · {formatPct((assignmentNotional / stocksValue) * 100, 0)} do valor em ações
               </p>
             </div>
           )}
@@ -235,7 +235,15 @@ export default async function RaioXPage() {
                   <span className="text-slate-500">Ser exercido:</span> compra {formatNumber(p.quantity, 0)} {p.opt.underlying} por{" "}
                   {formatBRL(p.quantity * p.opt.strike)} — custo efetivo {formatBRL(effectiveCost)}/ação contra{" "}
                   {formatBRL(p.opt.underlyingPrice)} de mercado (<span className="text-red-400">{formatBRL(-lossIfAssigned)}</span> no dia
-                  do exercício, se o preço não mudar). O caixa cobre: sobram {formatBRL(cash - p.quantity * p.opt.strike)}.
+                  do exercício, se o preço não mudar).{" "}
+                  {cash >= p.quantity * p.opt.strike ? (
+                    <>O caixa cobre: sobram {formatBRL(cash - p.quantity * p.opt.strike)}.</>
+                  ) : (
+                    <span className="text-red-400">
+                      O caixa não cobre: faltam {formatBRL(p.quantity * p.opt.strike - cash)}, que viriam do Invest Flex (empréstimo, com
+                      juros) ou da venda de ações.
+                    </span>
+                  )}
                 </li>
                 <li>
                   <span className="text-slate-500">Virar pó:</span> {p.opt.underlying} precisa subir{" "}
