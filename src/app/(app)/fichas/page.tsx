@@ -1,7 +1,8 @@
 import { PageHeader, Card, Label, Input, Select, Textarea, Button, Badge } from "@/components/ui";
 import { formatBRL, formatPct, formatNumber, formatDate } from "@/lib/domain/format";
 import { getPositionPlans } from "@/lib/domain/queries";
-import type { InvestPositionPlan, PlanAction } from "@/lib/domain/types";
+import type { PlanAction } from "@/lib/domain/types";
+import { isPlanComplete } from "@/lib/domain/plans";
 import { getSnapshot, SECTOR_LABEL } from "@/lib/fase0/snapshot";
 import { savePlan } from "./actions";
 
@@ -17,8 +18,7 @@ const ACTION_LABEL: Record<PlanAction, string> = {
   call_coberta: "Call coberta",
 };
 
-const isComplete = (p: InvestPositionPlan | undefined) =>
-  !!p && p.action !== "a_definir" && !!p.thesis && (p.exit_price !== null || p.stop_price !== null) && !!p.deadline;
+const isComplete = isPlanComplete;
 
 export default async function FichasPage() {
   const [rows, plans] = await Promise.all([getSnapshot(), getPositionPlans()]);

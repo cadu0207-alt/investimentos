@@ -15,11 +15,13 @@ import {
   LogOut,
   ScanSearch,
   ClipboardList,
+  Siren,
 } from "lucide-react";
 
 const links = [
   { href: "/dashboard", label: "Visão geral", icon: LayoutDashboard },
   { href: "/raio-x", label: "Raio-X", icon: ScanSearch },
+  { href: "/alertas", label: "Alertas de venda", icon: Siren },
   { href: "/fichas", label: "Fichas de posição", icon: ClipboardList },
   { href: "/posicoes", label: "Posições", icon: Wallet },
   { href: "/opcoes", label: "Risco de opções", icon: LineChart },

@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/raio-x": ["./docs/fase0/**/*.{csv,json}"],
     "/fichas": ["./docs/fase0/**/*.{csv,json}"],
+    "/alertas": ["./docs/fase0/**/*.{csv,json}"],
   },
 };
 
