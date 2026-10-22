@@ -1,0 +1,29 @@
+{
+  "fonte": "Necton — IR, consolidado do mês (corretora BTG Pactual; não há outra conta)",
+  "mes": "2026-10",
+  "swing_trade": {
+    "resultado_mes": -2714.95,
+    "prejuizo_a_compensar": 27628.01,
+    "base_imposto": 0,
+    "imposto_a_pagar": 0,
+    "total_vendas_acoes": 11980.12,
+    "limite_isencao": 20000,
+    "execucoes_visiveis": [
+      { "data": "2026-10-01", "venda": 3712.96, "custo": 4138.61, "demais_custos": 20.99, "resultado": -446.64 },
+      { "data": "2026-10-02", "venda": 3710.16, "custo": 4055.91, "demais_custos": 21.11, "resultado": -366.86 },
+      { "data": "2026-10-09", "venda": 4557.00, "custo": 4021.76, "demais_custos": 4.09, "resultado": 531.15 }
+    ]
+  },
+  "day_trade": {
+    "resultado_mes": -83.50,
+    "prejuizo_a_compensar": 1974.97,
+    "irrf_mes": 0.07,
+    "irrf_periodos_anteriores": 63.70,
+    "imposto_a_pagar": 0,
+    "execucoes_visiveis": [
+      { "data": "2026-10-08", "venda": 89.00, "compra": 81.00, "demais_custos": 0.50, "resultado": 7.50 },
+      { "data": "2026-10-09", "venda": 49.40, "compra": 101.40, "demais_custos": 0.50, "resultado": -52.50 },
+      { "data": "2026-10-20", "venda": 6.00, "compra": 44.00, "demais_custos": 0.50, "resultado": -38.50 }
+    ]
+  }
+}

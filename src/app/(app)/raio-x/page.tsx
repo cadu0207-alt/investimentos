@@ -1,21 +1,25 @@
 import { PageHeader, Card, StatCard, Badge } from "@/components/ui";
 import { formatBRL, formatPct, formatNumber, formatDate } from "@/lib/domain/format";
-import { getSnapshot, getAccountSnapshot, SECTOR_LABEL, SNAPSHOT_DATE } from "@/lib/fase0/snapshot";
+import { getSnapshot, getAccountSnapshot, getIrSnapshot, SECTOR_LABEL, SNAPSHOT_DATE } from "@/lib/fase0/snapshot";
 
 const PENDENCIAS = [
-  "Prejuízos realizados nos últimos meses (notas de corretagem ou aba Prejuízos) — base do IR e de onde as perdas aconteceram.",
-  "Confirmar se existe outra conta além da Necton (BTG 8683436 usa a mesma infraestrutura).",
   "Preencher a ficha de cada posição: tese, ação, gatilho de saída e prazo.",
+  "Opcional: posição e custo médio em 31/12/2025 para conciliar o prejuízo acumulado ao centavo.",
 ];
 
 const RESOLVIDAS = [
   "Strikes, vencimentos e cotação dos objetos das opções (Necton).",
   "Caixa e bloqueios da conta.",
+  "Conta única: Necton/BTG Pactual.",
+  "Prejuízo acumulado a compensar (IR de out/2026).",
+  "Histórico de perdas de 2026 a partir das 50 notas (docs/fase0/historico-2026.md).",
   "PM: os valores do Profit estavam errados (ex.: CYRE3 33,00 × 22,20 real; PETR4 29,19 × 43,96 real). Fonte passa a ser a Necton.",
 ];
 
 export default async function RaioXPage() {
-  const [rows, account] = await Promise.all([getSnapshot(), getAccountSnapshot()]);
+  const [rows, account, ir] = await Promise.all([getSnapshot(), getAccountSnapshot(), getIrSnapshot()]);
+  const carriedLosses = ir.swing_trade.prejuizo_a_compensar + ir.day_trade.prejuizo_a_compensar;
+  const irMonthLabel = new Date(`${ir.mes}-01T00:00:00Z`).toLocaleDateString("pt-BR", { month: "short", year: "numeric", timeZone: "UTC" });
 
   const stocks = rows.filter((r) => r.kind === "acao" || r.kind === "fii");
   const options = rows.filter((r) => r.option !== null);
@@ -95,6 +99,48 @@ export default async function RaioXPage() {
           hint={`Saldo livre ${formatBRL(account.saldo_disponivel)}`}
         />
       </div>
+
+      <Card className="mb-6">
+        <div className="flex items-start justify-between flex-wrap gap-3 mb-4">
+          <div>
+            <p className="text-sm font-medium text-slate-300">Prejuízos realizados e IR</p>
+            <p className="text-xs text-slate-500 mt-0.5">Consolidado de {irMonthLabel} na Necton · conta única (BTG Pactual)</p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-slate-500 uppercase">Prejuízo acumulado a compensar</p>
+            <p className="text-lg font-semibold text-red-400">{formatBRL(carriedLosses)}</p>
+            <p className="text-xs text-slate-500">Abate lucros futuros antes do IR</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { label: "Swing trade (ações e opções)", data: ir.swing_trade, rate: 0.15 },
+            { label: "Day trade", data: ir.day_trade, rate: 0.2 },
+          ].map(({ label, data, rate }) => (
+            <div key={label} className="rounded-lg border border-slate-800 p-4">
+              <p className="text-xs text-slate-500 uppercase">{label}</p>
+              <div className="mt-2 grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <p className="text-xs text-slate-500">Resultado do mês</p>
+                  <p className={data.resultado_mes >= 0 ? "text-emerald-400" : "text-red-400"}>{formatBRL(data.resultado_mes)}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500">Prejuízo a compensar</p>
+                  <p className="text-red-400">{formatBRL(data.prejuizo_a_compensar)}</p>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500 mt-3">
+                Alíquota de {formatPct(rate * 100, 0)}: lucros futuros de até {formatBRL(data.prejuizo_a_compensar)} nessa modalidade não pagam
+                IR (até {formatBRL(data.prejuizo_a_compensar * rate)} de imposto evitado).
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-slate-500 mt-3">
+          Vendas de ações no mês: {formatBRL(ir.swing_trade.total_vendas_acoes)} (limite de isenção{" "}
+          {formatBRL(ir.swing_trade.limite_isencao)}; opções não entram na isenção).
+        </p>
+      </Card>
 
       <Card className="mb-6">
         <div className="flex items-start justify-between flex-wrap gap-3 mb-4">

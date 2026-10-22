@@ -88,6 +88,39 @@ export async function getAccountSnapshot(): Promise<AccountSnapshot> {
   return JSON.parse(json);
 }
 
+export const IR_MONTH = "2026-10";
+
+interface IrExecution {
+  data: string;
+  resultado: number;
+}
+
+export interface IrSnapshot {
+  fonte: string;
+  mes: string;
+  swing_trade: {
+    resultado_mes: number;
+    prejuizo_a_compensar: number;
+    imposto_a_pagar: number;
+    total_vendas_acoes: number;
+    limite_isencao: number;
+    execucoes_visiveis: IrExecution[];
+  };
+  day_trade: {
+    resultado_mes: number;
+    prejuizo_a_compensar: number;
+    irrf_mes: number;
+    irrf_periodos_anteriores: number;
+    imposto_a_pagar: number;
+    execucoes_visiveis: IrExecution[];
+  };
+}
+
+export async function getIrSnapshot(): Promise<IrSnapshot> {
+  const json = await readFile(path.join(SNAPSHOT_DIR, `ir-${IR_MONTH}.json`), "utf8");
+  return JSON.parse(json);
+}
+
 export const SECTOR_LABEL: Record<string, string> = {
   saneamento: "Saneamento",
   varejo: "Varejo",
