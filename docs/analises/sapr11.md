@@ -289,6 +289,10 @@ lado continua: no pessimista (R$ 34), as 900 perdem ~R$ 5,6 mil (440 perderiam ~
 - Você decide depois do 2º turno (25/10), entre 26 e 30/10: ainda em outubro, dentro da
   janela de isenção (último pregão do mês: 30/10).
 
+**Atualização 22/10:** o caixa da VIVTX430 vai sair da venda de 100 TOTS3 em 23/10. Vender
+também 100 SAPR11 em outubro levaria as vendas do mês a ~R$ 20,3 mil (acima da isenção);
+a venda de SAPR11 para caixa deixa de ser necessária.
+
 ### Consequências de segurar as 900
 - **Exceção ao limite de 15%**, consciente e com prazo (até o gatilho 6). Fica registrada na
   ficha para o painel mostrar o motivo.

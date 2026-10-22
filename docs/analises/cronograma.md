@@ -35,10 +35,10 @@ Uma posição por vez. Cada análise vira um dossiê em `docs/analises/` e termi
 | # | Posição | Prazo que manda | Status | Dossiê |
 |---|---|---|---|---|
 | 1 | VIVTX430 / VIVT3 | vencimento 18/12/2026 | **decidido 22/10** (esperar 3T26 com gatilhos; ficha gravada) | [vivt3-vivtx430.md](vivt3-vivtx430.md) |
-| 2 | SAPR11 | venda de 100 units para o caixa da VIVT (decidir entre 26 e 30/10, após o 2º turno); 3T26 em 12/11 | tese definida (segurar até a troca de comando); gatilhos aguardando confirmação | [sapr11.md](sapr11.md) |
+| 2 | SAPR11 | 3T26 em 12/11 (caixa da VIVT passou para a TOTS3) | tese definida (segurar até a troca de comando); gatilhos aguardando confirmação | [sapr11.md](sapr11.md) |
 | 3 | VIVA3 | — | pendente | |
 | 4 | SUZB3 | — | pendente | |
-| 5 | TOTS3 | resultado 3T26 em 04/11 | análise inicial pronta | [tots3-2026-10-22.md](tots3-2026-10-22.md) |
+| 5 | TOTS3 | execução em 23/10; 3T26 em 04/11 | **decidido 22/10** (vender 100 + call coberta nas 200; ficha gravada) | [tots3.md](tots3.md) |
 | 6 | CYRE3 | — | pendente | |
 | 7 | KLBNL206 | vencimento 18/12/2026 | pendente | |
 | 8 | WIZCD120 | vencimento 16/04/2027 | pendente | |
