@@ -28,6 +28,8 @@ Uma posição por vez. Cada análise vira um dossiê em `docs/analises/` e termi
      (strike + prêmio) contra o PM, eventos antes do vencimento (resultado, data ex) e quantas
      ações estão livres (não bloqueadas em garantia). Regra: só vender call num strike em que
      você venderia a ação de bom grado — e, se exercida, deixar exercer em vez de recomprar no pânico.
+     Antes, classificar a posição como **núcleo perene** (em regra sem call) ou **tática** (call
+     perto do alvo de saída): ver [estrategia-call-coberta.md](estrategia-call-coberta.md).
 7. **Decisão e ficha** — você escreve tese, ação, alvo, stop, gatilho de revisão e prazo.
 
 ## Ordem e status
@@ -37,7 +39,7 @@ Uma posição por vez. Cada análise vira um dossiê em `docs/analises/` e termi
 | 1 | VIVTX430 / VIVT3 | vencimento 18/12/2026 | **decidido 22/10** (esperar 3T26 com gatilhos; ficha gravada) | [vivt3-vivtx430.md](vivt3-vivtx430.md) |
 | 2 | SAPR11 | 3T26 em 12/11 (caixa da VIVT passou para a TOTS3) | tese definida (segurar até a troca de comando); gatilhos aguardando confirmação | [sapr11.md](sapr11.md) |
 | 3 | VIVA3 | resultado 3T26 em 05/11 | **decidido 23/10** (manter até ~R$ 34,60; ficha gravada) | [viva3.md](viva3.md) |
-| 4 | SUZB3 | — | pendente | |
+| 4 | SUZB3 | resultado 3T26 em 05/11 | **decidido 23/10** (núcleo perene; 1 lote L501; alvo R$ 63; ficha gravada) | [suzb3.md](suzb3.md) |
 | 5 | TOTS3 | execução em 23/10; 3T26 em 04/11 | **decidido 22/10** (vender 100 + call coberta nas 200; ficha gravada) | [tots3.md](tots3.md) |
 | 6 | CYRE3 | — | pendente | |
 | 7 | KLBNL206 | 3T26 da Klabin em 28/10; vencimento 18/12/2026 | **decidido 23/10** (manter; vender se prêmio chegar a 0,60; ficha gravada) | [klbnl206.md](klbnl206.md) |
