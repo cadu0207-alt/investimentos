@@ -195,8 +195,23 @@ Pontos para a escolha de amanhã:
 (isento). Vender também 100 SAPR11 em outubro passaria de R$ 20 mil — com o caixa resolvido
 pela TOTS3, a venda de SAPR11 deixa de ser necessária.
 
-**Ficha gravada:** ação "reduzir", alvo R$ 48,45 (ajustar para 46,73 se escolher novembro),
-revisão em 05/11 (dia seguinte ao 3T26), prazo 18/12.
+**Ficha gravada:** ação "reduzir", revisão em 05/11 (dia seguinte ao 3T26), prazo 18/12.
+
+### Execução (23/10)
+| Ordem | Preço | Situação |
+|---|---|---|
+| Venda de 100 TOTS3 (limitada) | R$ 44,58 | enviada; máxima do dia R$ 44,75, ordem ainda aparecia aberta — confirmar execução |
+| Venda da call **L440 dez** (strike 44,06), limitada, **1 lote (100)** | **R$ 4,55** (book 4,36 × 4,64) → R$ 455 | enviada — confirmar execução |
+
+**Divisão das 300:** 100 à venda · 100 cobertas pela L440 · **100 livres na mão**, sem call
+(ficam com toda a alta e toda a queda; podem receber call depois, por exemplo após o 3T26).
+
+Comparação que levou à escolha (book de 23/10, 200 ações, cenários 34/44/54):
+L435 R$ 922 (sai a 48,17) · **L440 R$ 872 no bid (sai a 48,42)** · L445 R$ 824 (48,68) ·
+L450 R$ 780 (48,96) · L475 R$ 584 (50,48). Todas superam manter na média (+R$ 262 a 375);
+a L440 tem o melhor resultado médio e saída no alvo da ficha.
+
+A 4,55, se exercida, a saída fica em **R$ 48,61** (+51% sobre o PM) — novo alvo da ficha.
 
 ## Fontes
 - [Money Times — lucro de R$ 241 mi no 2T26](https://www.moneytimes.com.br/totvs-tots3-lucra-r-241-milhoes-no-2t26-com-avanco-de-receita-e-ebitda-impulsionado-por-ia-vtra/)
