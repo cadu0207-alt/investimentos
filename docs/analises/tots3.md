@@ -201,7 +201,7 @@ pela TOTS3, a venda de SAPR11 deixa de ser necessária.
 | Ordem | Preço | Situação |
 |---|---|---|
 | Venda de 100 TOTS3 (limitada) | R$ 44,58 | enviada; máxima do dia R$ 44,75, ordem ainda aparecia aberta — confirmar execução |
-| Venda da call **L440 dez** (strike 44,06), limitada, **1 lote (100)** | **R$ 4,55** (book 4,36 × 4,64) → R$ 455 | enviada — confirmar execução |
+| Venda da call **L440 dez** (strike 44,06), limitada, **1 lote (100)** | **R$ 4,55** (book 4,36 × 4,64) → R$ 455 | **executada em 23/10** |
 
 **Divisão das 300:** 100 à venda · 100 cobertas pela L440 · **100 livres na mão**, sem call
 (ficam com toda a alta e toda a queda; podem receber call depois, por exemplo após o 3T26).
