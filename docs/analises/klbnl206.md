@@ -29,6 +29,18 @@ Histórico em KLBN em 2026: put KLBNN194 vendida em jan virou pó (+R$ 155).
 O dinheiro em jogo é pequeno (~R$ 77) e o prejuízo já aconteceu: entra no IR de qualquer
 jeito, agora ou no vencimento. A decisão aqui é mais de **disciplina** do que de dinheiro.
 
+## Decisão (23/10)
+**Manter**, esperando a eleição (25/10) e o resultado da Klabin (28/10). Vender se surgir
+oportunidade; caso contrário, aceitar que vire pó.
+
+| Gatilho | Ação |
+|---|---|
+| Prêmio da call chegar a **R$ 0,60** (~R$ 420 nas 700; KLBN11 perto de R$ 20) | Vender |
+| Nada acontece até 18/12 | Deixa virar pó (perda máxima já é o restante, ~R$ 77) |
+
+Referência de preço da call com ~40 dias (vol 28%): KLBN11 19,00 → 0,25 · 19,50 → 0,40 ·
+20,00 → 0,60 · 20,50 → 0,86. Ficha gravada no app.
+
 ## Lição para o Diário
 Mesmo padrão das 13 calls que viraram pó em 2026: compra de call fora do dinheiro, prazo de
 8 meses, sem alvo nem stop escritos. Pela regra nova (Limites de risco), compra de call só

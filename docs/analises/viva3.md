@@ -115,6 +115,28 @@ dos analistas** (R$ 33–38). Os strikes perto dos alvos (32+) pagam menos que o
 coberta só faz sentido se o print mostrar volatilidade alta (como na TOTS3, por causa do
 resultado de 05/11) ou se você aceitar sair no PM. Lição da VIVAJ293: se vender, deixar exercer.
 
+## 6b. Book real das calls de dezembro (print de 23/10, VIVA3 ~R$ 26,90)
+
+Como na TOTS3, o mercado paga bem acima do modelo (resultado de 05/11 dentro do prazo). Não
+há strike entre 32,39 e 36,89, então nenhum vende exatamente no seu alvo (R$ 34,60).
+
+| Call | Strike | Bid / Ask | Nas 500 | Ao mês | Vende a (strike + bid) | vs alvo R$ 34,60 | Prob. (delta) | Ganho médio vs manter* |
+|---|---:|---|---:|---:|---:|---:|---:|---:|
+| L290 | 29,14 | 1,72 / 1,81 | R$ 860 | 3,5% | R$ 30,86 | −R$ 3,74 | 40% | +R$ 377 |
+| L300 | 30,14 | 1,39 / 1,48 | R$ 695 | 2,8% | R$ 31,53 | −R$ 3,07 | 32% | +R$ 338 |
+| L311 | 31,14 | 1,15 / 1,21 | R$ 575 | 2,3% | R$ 32,29 | −R$ 2,31 | 25% | +R$ 342 |
+| **L323** | 32,39 | **0,88 / 0,93** | **R$ 440** | **1,8% (1,7× CDI)** | **R$ 33,27** | **−R$ 1,33** | 18% | **+R$ 364** |
+| L368 | 36,89 | 0,35 / 0,40 | R$ 175 | 0,7% (< CDI) | R$ 37,24 | +R$ 2,64 | ~4% | +R$ 175 |
+
+\*Cenários do item 5 (R$ 22 / 28 / 33 com 25/50/25%).
+
+**Leitura para a sua tese (sair perto de R$ 34,60):**
+- **L323** é a que mais conversa com o alvo: vende a R$ 33,27 se exercida (R$ 1,33 abaixo da
+  média dos alvos), rende acima do CDI e tem só ~18% de chance de exercício.
+- **L368** fica acima do alvo, mas paga menos que deixar o dinheiro no CDI.
+- Strikes 29–31 pagam mais, porém vendem bem abaixo do que você acredita que a ação vale.
+- Book estreito na L323 (0,88 × 0,93): ordem limitada perto de 0,90.
+
 ## 7. Caminhos
 
 | Caminho | O que entrega |
@@ -137,6 +159,27 @@ Observações:
    certa; o PM não é)
 2. **Decisão** (A–E) com alvo, stop e revisão (sugestão: 06/11, dia seguinte ao 3T26).
 3. Para call coberta: print da cadeia de VIVA de nov e dez.
+
+## 9. Decisão (23/10)
+**Manter as 500** até perto da média dos alvos dos analistas.
+
+| Item | Valor |
+|---|---|
+| Tese (sua) | Mesmo tendo vindo de put exercida, a tese é boa: empresa líder, margem alta, dívida quase zero, ação barata |
+| Alvo | **R$ 34,60** (média dos alvos: 30, 33, 36, 36, 38; mediana R$ 36) |
+| Revisão | 06/11 (dia seguinte ao 3T26) e resultado do Natal (fev/27) |
+| Prazo | 31/12/2026 (horizonte dos alvos); revisar se não andar |
+| Call coberta | Opcional, com strike perto do alvo (33–35), quando houver print da cadeia |
+
+Ficha gravada no app.
+
+### Call coberta (23/10)
+| Ordem | Preço | Situação |
+|---|---|---|
+| Venda de **VIVAL323** (strike 32,39, venc. 18/12), 500 | R$ 0,90 | **executada em 23/10** |
+
+Prêmio recebido: **R$ 450**. As 500 ações ficam bloqueadas como cobertura até 18/12. Se exercida em 18/12: vende as 500 a **R$ 33,29**
+(+14% sobre o PM, R$ 1,31 abaixo da média dos alvos). Se não: fica com as ações e o prêmio.
 
 ## Fontes
 - [BTG Pactual — VIVA3](https://content.btgpactual.com/research/ativo/VIVA3)
