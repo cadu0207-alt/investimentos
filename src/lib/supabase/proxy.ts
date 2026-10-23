@@ -42,6 +42,7 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/limites") ||
     request.nextUrl.pathname.startsWith("/comprar") ||
     request.nextUrl.pathname.startsWith("/importar") ||
+    request.nextUrl.pathname.startsWith("/analises") ||
     request.nextUrl.pathname.startsWith("/configuracoes");
 
   if (!user && isAppRoute) {

@@ -5,6 +5,8 @@ import type { PlanAction } from "@/lib/domain/types";
 import { isPlanComplete } from "@/lib/domain/plans";
 import { getSnapshot, SECTOR_LABEL } from "@/lib/fase0/snapshot";
 import { savePlan } from "./actions";
+import Link from "next/link";
+import { findDossier, listAnalyses } from "@/lib/analises/docs";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +23,7 @@ const ACTION_LABEL: Record<PlanAction, string> = {
 const isComplete = isPlanComplete;
 
 export default async function FichasPage() {
-  const [rows, plans] = await Promise.all([getSnapshot(), getPositionPlans()]);
+  const [rows, plans, analyses] = await Promise.all([getSnapshot(), getPositionPlans(), listAnalyses()]);
   const planByTicker = new Map(plans.map((p) => [p.ticker, p]));
 
   // Opções primeiro (vencem antes), depois ações do maior para o menor peso
@@ -67,6 +69,14 @@ export default async function FichasPage() {
                           r.currentPrice
                         )}`}
                   </span>
+                  {(() => {
+                    const dossier = findDossier(r.ticker, analyses) ?? (r.option ? findDossier(r.option.underlying, analyses) : undefined);
+                    return dossier ? (
+                      <Link href={`/analises/${dossier.slug}`} className="text-xs text-emerald-400 hover:underline">
+                        Ver dossiê
+                      </Link>
+                    ) : null;
+                  })()}
                   <span className={`text-xs font-medium ml-auto ${r.openResult >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                     {formatBRL(r.openResult)} ({formatPct((r.openResult / Math.abs(r.invested)) * 100, 1)})
                   </span>

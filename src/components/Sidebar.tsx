@@ -19,6 +19,7 @@ import {
   SlidersHorizontal,
   ShieldCheck,
   Upload,
+  BookOpen,
 } from "lucide-react";
 
 const links = [
@@ -28,6 +29,7 @@ const links = [
   { href: "/comprar", label: "Posso comprar?", icon: ShieldCheck },
   { href: "/limites", label: "Limites de risco", icon: SlidersHorizontal },
   { href: "/fichas", label: "Fichas de posição", icon: ClipboardList },
+  { href: "/analises", label: "Análises", icon: BookOpen },
   { href: "/posicoes", label: "Posições", icon: Wallet },
   { href: "/opcoes", label: "Risco de opções", icon: LineChart },
   { href: "/alocacao", label: "Alocação", icon: PieChart },
