@@ -192,6 +192,10 @@ só operação cobrindo o 3T26 e o período da possível data-com de proventos; 
 
 Ficha gravada no app.
 
+**Execução (23/10, 16:23):** SUZBL501 vendida — 100 a **R$ 0,35** (R$ 35 recebidos). Se exercida
+em 18/12, vende 100 a R$ 50,48. (O Profit mostra PM de R$ 47,40 para SUZB3; a referência é o
+PM da Necton, R$ 47,90.)
+
 ## Fontes
 - [Suzano RI — remuneração ao acionista](https://ri.suzano.com.br/Portuguese/Informacoes-Financeiras/Remuneracao-ao-Acionista/default.aspx)
 - [SEC — aviso aos acionistas (dividendo adicional 2026)](https://www.sec.gov/Archives/edgar/data/0000909327/000162828026026943/suzano-avisoaosacionistasx.htm)
